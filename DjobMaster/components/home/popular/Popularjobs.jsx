@@ -18,7 +18,7 @@ const Popularjobs = () => {
   const router = useRouter();
   const defaultJobs = ["React Developer", "TypeScript Developer", "Software Engineer", "Laravel Developer"];
   var randomJob = defaultJobs[Math.floor(Math.random()*defaultJobs.length)];
-  const {data, isLoading, error} = useFetch('search', {
+  const {data, isLoading, error, refetch} = useFetch('search', {
     query: randomJob,
     num_pages: 1,
   });
@@ -26,8 +26,8 @@ const Popularjobs = () => {
     <View style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.headerTitle}>Popular Jobs</Text>
-        <TouchableOpacity>
-          <Text style={styles.headerBtn}>Show all</Text>
+        <TouchableOpacity onPress={refetch}>
+          <Text style={styles.headerBtn}>Refresh</Text>
         </TouchableOpacity>
       </View>
       <View style={styles.cardsContainer}>
