@@ -11,7 +11,7 @@ const useFetch = (endpoint, query) => {
 
   const options = {
     method: "GET",
-    url: "https://jsearch.p.rapidapi.com/search",
+    url: `https://jsearch.p.rapidapi.com/${endpoint}`,
     params: {
       ...query,
     },
