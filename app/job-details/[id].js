@@ -5,6 +5,8 @@ import {
   ActivityIndicator,
   RefreshControl,
   ScrollView,
+  Share,
+  Alert,
 } from "react-native";
 import { Stack, useRouter, useSearchParams } from "expo-router";
 import { useCallback, useState } from "react";
@@ -49,6 +51,26 @@ const JobDetails = () => {
         break;
     }
   }
+  const onShare = async () => {
+    try {
+      const result = await Share.share({
+        message:
+        `Hey, check out this amazing job opportunity I found on Djobs! The job title is ${data[0].job_title}, and it's a perfect match for your skills and experience. Apply now and take the next step in your career! ${data[0]?.job_google_link ?? 'https://careers.google.com/jobs/results'}`,
+      });
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          // shared with activity type of result.activityType
+          console.log(result.activityType)
+        } else {
+          // shared
+        }
+      } else if (result.action === Share.dismissedAction) {
+        // dismissed
+      }
+    } catch (error) {
+      Alert.alert(error.message);
+    }
+  };
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.lightWhite }}>
       <Stack.Screen
@@ -64,7 +86,7 @@ const JobDetails = () => {
             />
           ),
           headerRight: () => (
-            <ScreenHeaderBtn iconUrl={icons.share} dimension="60%" />
+            <ScreenHeaderBtn iconUrl={icons.share} dimension="60%" handlePress={() => onShare()}/>
           ),
           headerTitle: "",
         }}
