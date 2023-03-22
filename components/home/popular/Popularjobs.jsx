@@ -14,8 +14,14 @@ import { useRouter } from "expo-router";
 import PopularJobCard from "../../common/cards/popular/PopularJobCard";
 import useFetch from '../../../hook/useFetch';
 
+
 const Popularjobs = () => {
   const router = useRouter();
+  const [selectedJob, setSelectedJob] = useState()
+  const handleCardPress = (item) => {
+    router.push(`/job-details/${item.job_id}`)
+    setSelectedJob(item.job_id)
+  }
   const defaultJobs = ["React Developer", "TypeScript Developer", "Software Engineer", "Laravel Developer"];
   var randomJob = defaultJobs[Math.floor(Math.random()*defaultJobs.length)];
   const {data, isLoading, error, refetch} = useFetch('search', {
@@ -38,7 +44,7 @@ const Popularjobs = () => {
         ) : (
           <FlatList
             data={data}
-            renderItem={({ item }) => <PopularJobCard item={item} handleCardPress={() => router.push(`/job-details/${item.job_id}`)} />}
+            renderItem={({ item }) => <PopularJobCard item={item} selectedJob={selectedJob} handleCardPress={handleCardPress} />}
             keyExtractor={(item) => item?.job_id}
             contentContainerStyle={{ columnGap: SIZES.medium }}
             horizontal

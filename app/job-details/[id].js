@@ -35,7 +35,15 @@ const JobDetails = () => {
   });
 
   const [refreshing, setRefreshing] = useState(false);
-  const onRefresh = () => {};
+  /**
+   * OnRefresh is a function that sets the refreshing state to true, refetches the data, and then sets
+   * the refreshing state to false.
+   */
+  const onRefresh = () => useCallback(() => {
+    setRefreshing(true)
+    refetch();
+    setRefreshing(false);
+  },[]);
 
   const displayTabContent = () => {
     switch (activeTab) {
