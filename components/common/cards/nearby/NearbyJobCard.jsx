@@ -8,7 +8,7 @@ const NearbyJobCard = ({ job, handleNavigate }) => {
   return (
     <TouchableOpacity
       style={styles.container}
-      opPress={handleNavigate}
+      onPress={handleNavigate}
     >
       <TouchableOpacity style={styles.logoContainer}>
         <Image
