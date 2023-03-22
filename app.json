@@ -5,6 +5,12 @@
       "bundler": "metro"
     },
     "name": "dJobs",
-    "slug": "dJobs"
+    "slug": "dJobs",
+    "icon": "./assets/icons/icon.ico",
+    "splash": {
+      "image": "./assets/images/logo.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    }
   }
 }
