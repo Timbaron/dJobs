@@ -8,9 +8,11 @@ import NearbyJobCard from "../../common/cards/nearby/NearbyJobCard";
 import useFetch from "../../../hook/useFetch";
 
 const Nearbyjobs = () => {
+  const defaultJobs = ["React Developer", "TypeScript Developer", "Software Engineer", "Laravel Developer"];
+  var randomJob = defaultJobs[Math.floor(Math.random()*defaultJobs.length)];
   const router = useRouter();
   const { data, isLoading, error } = useFetch("search", {
-    query: "React developer",
+    query: randomJob,
     num_pages: 1,
   });
   return (
